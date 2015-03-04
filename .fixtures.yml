@@ -1,0 +1,10 @@
+---
+fixtures:
+  repositories:
+    jenkins: 'https://github.com/jenkinsci/puppet-jenkins'
+    apt:     'https://github.com/puppetlabs/puppetlabs-apt'
+    java:    'https://github.com/puppetlabs/puppetlabs-java'
+    stdlib:  'https://github.com/puppetlabs/puppetlabs-stdlib'
+
+  symlinks:
+    service_jenkins: "../../../"
