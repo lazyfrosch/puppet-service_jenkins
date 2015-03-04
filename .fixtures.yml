@@ -3,6 +3,8 @@ fixtures:
   repositories:
     jenkins: 'https://github.com/jenkinsci/puppet-jenkins'
     apt:     'https://github.com/puppetlabs/puppetlabs-apt'
+    apache:  'https://github.com/puppetlabs/puppetlabs-apache'
+    concat:  'https://github.com/puppetlabs/puppetlabs-concat'
     java:    'https://github.com/puppetlabs/puppetlabs-java'
     stdlib:  'https://github.com/puppetlabs/puppetlabs-stdlib'
 

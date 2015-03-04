@@ -27,3 +27,6 @@ spec/fixtures/
 ## Puppet module
 pkg/
 coverage/
+
+# Vagrant
+.vagrant/

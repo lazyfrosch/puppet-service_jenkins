@@ -1,0 +1,17 @@
+<%= ERB.new(File.read(File.expand_path('_header.erb',File.dirname(file)))).result(binding) -%>
+<% prefix = scope.lookupvar('service_jenkins::prefix') -%>
+
+AllowEncodedSlashes NoDecode
+
+<% if scope.lookupvar('service_jenkins::root_redirect') and prefix != '/' -%>
+RedirectMatch ^/$ <%= prefix %>
+
+<% end -%>
+<% if scope.lookupvar('service_jenkins::https_redirect') -%>
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule <%= prefix %>(.*) https://<%= scope.lookupvar('fqdn') %><%= prefix %>$1 [R,L]
+
+<% end -%>
+ProxyPass <%= prefix %> http://localhost:8080<%= prefix %>
+ProxyPassReverse <%= prefix %> http://localhost:8080<%= prefix %>
