@@ -71,8 +71,8 @@ describe 'service_jenkins' do
       end
 
       it { should contain_class('service_jenkins') }
-      it { should contain_file_line('Jenkins sysconfig setting JENKINS_ARGS').with_line(/http\.proxyHost/)}
-      it { should contain_file_line('Jenkins sysconfig setting JENKINS_ARGS').with_line(/https\.proxyHost/)}
+      it { should contain_file_line('Jenkins sysconfig setting JAVA_ARGS').with_line(/http\.proxyHost/)}
+      it { should contain_file_line('Jenkins sysconfig setting JAVA_ARGS').with_line(/https\.proxyHost/)}
     end
 
   end

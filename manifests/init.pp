@@ -30,7 +30,7 @@ class service_jenkins(
   }
 
   if $::proxy_http_host and $::proxy_http_port {
-    $proxy = [
+    $java_args = [
       "-Dhttp.proxyHost=${::proxy_http_host}",
       "-Dhttp.proxyPort=${::proxy_http_port}",
       "-Dhttps.proxyHost=${::proxy_http_host}",
@@ -38,19 +38,13 @@ class service_jenkins(
     ]
   }
   else {
-    $proxy = []
+    $java_args = []
   }
-
-  $jenkins_args = join(
-    concat(
-      [ $::service_jenkins::params::jenkins_args ],
-      $proxy
-    ),
-  ' ')
 
   $config_hash_default = {
     'PREFIX'       => { value => $prefix },
-    'JENKINS_ARGS' => { value => $jenkins_args },
+    'JENKINS_ARGS' => { value => $::service_jenkins::params::jenkins_args },
+    'JAVA_ARGS'    => { value => join($java_args, ' ') },
   }
 
   $config_hash_real = merge($config_hash_default, $config_hash)
