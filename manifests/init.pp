@@ -42,8 +42,6 @@ class service_jenkins(
   } ->
   Class['service_jenkins']
 
-  include ::jenkins::master
-
   if $use_apache {
 
     if ! defined(Class['::service_webserver']) {
