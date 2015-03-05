@@ -29,9 +29,26 @@ class service_jenkins(
     include ::baseline
   }
 
+  if $::proxy_http_host and $::proxy_http_port {
+    $proxy = [
+      "-Dhttp.proxyHost=${::proxy_http_host}",
+      "-Dhttp.proxyPort=${::proxy_http_port}",
+      "-Dhttps.proxyHost=${::proxy_http_host}",
+      "-Dhttps.proxyPort=${::proxy_http_port}",
+    ]
+  }
+  else {
+    $proxy = []
+  }
+
+  $jenkins_args = join(concat(
+    [ $::service_jenkins::params::jenkins_args ],
+    $proxy
+  ), ' ')
+
   $config_hash_default = {
     'PREFIX'       => { value => $prefix },
-    'JENKINS_ARGS' => { value => $::service_jenkins::params::jenkins_args },
+    'JENKINS_ARGS' => { value => $jenkins_args },
   }
 
   $config_hash_real = merge($config_hash_default, $config_hash)

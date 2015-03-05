@@ -62,6 +62,19 @@ describe 'service_jenkins' do
       it { should_not contain_class('apache') }
     end
 
+    context "on #{name} with proxy" do
+      let :facts do
+        default_facts.merge(facts).merge({
+          :proxy_http_host => 'test.proxy.org',
+          :proxy_http_port => 1234,
+        })
+      end
+
+      it { should contain_class('service_jenkins') }
+      it { should contain_file_line('Jenkins sysconfig setting JENKINS_ARGS').with_line(/http\.proxyHost/)}
+      it { should contain_file_line('Jenkins sysconfig setting JENKINS_ARGS').with_line(/https\.proxyHost/)}
+    end
+
   end
 
 end
