@@ -22,6 +22,13 @@ class service_jenkins(
   validate_bool($root_redirect)
   validate_bool($use_apache)
 
+  if defined('::service_baseline') {
+    include ::service_baseline
+  }
+  elsif defined('::baseline') {
+    include ::baseline
+  }
+
   $config_hash_default = {
     'PREFIX'       => { value => $prefix },
     'JENKINS_ARGS' => { value => $::service_jenkins::params::jenkins_args },
