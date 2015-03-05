@@ -41,10 +41,12 @@ class service_jenkins(
     $proxy = []
   }
 
-  $jenkins_args = join(concat(
-    [ $::service_jenkins::params::jenkins_args ],
-    $proxy
-  ), ' ')
+  $jenkins_args = join(
+    concat(
+      [ $::service_jenkins::params::jenkins_args ],
+      $proxy
+    ),
+  ' ')
 
   $config_hash_default = {
     'PREFIX'       => { value => $prefix },
