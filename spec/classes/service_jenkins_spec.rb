@@ -35,7 +35,6 @@ describe 'service_jenkins' do
       it { should contain_class('service_jenkins') }
 
       it { should contain_class('jenkins') }
-      it { should contain_class('jenkins::master') }
 
       it { should contain_class('java') }
 
