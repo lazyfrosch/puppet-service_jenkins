@@ -9,6 +9,7 @@ class service_jenkins(
   $https_redirect = false,
   $use_apache     = true,
   $root_redirect  = false,
+  $config_firewall = false,
 ) inherits ::service_jenkins::params {
 
   validate_hash($plugin_hash)
@@ -50,8 +51,9 @@ class service_jenkins(
   $config_hash_real = merge($config_hash_default, $config_hash)
 
   class { '::jenkins':
-    plugin_hash => $plugin_hash,
-    config_hash => $config_hash_real,
+    plugin_hash     => $plugin_hash,
+    config_hash     => $config_hash_real,
+    config_firewall => $config_firewall,
   } ->
   Class['service_jenkins']
 
