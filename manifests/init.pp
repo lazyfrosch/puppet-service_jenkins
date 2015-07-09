@@ -51,9 +51,9 @@ class service_jenkins(
   $config_hash_real = merge($config_hash_default, $config_hash)
 
   class { '::jenkins':
-    plugin_hash     => $plugin_hash,
-    config_hash     => $config_hash_real,
-    config_firewall => $config_firewall,
+    plugin_hash        => $plugin_hash,
+    config_hash        => $config_hash_real,
+    configure_firewall => $config_firewall,
   } ->
   Class['service_jenkins']
 
